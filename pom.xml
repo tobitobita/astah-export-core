@@ -106,6 +106,20 @@
 			<url>http://maven-svgdraw.luna.ddns.vc/repo/</url>
 		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>local_astah_repository</id>
+			<name>Local Astah* Plugin Repository</name>
+			<url>file://${env.M2_HOME}/repository/</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
 	<distributionManagement>
 		<repository>
 			<id>deploy-repository</id>
