@@ -4,31 +4,50 @@ import com.change_vision.jude.api.inf.model.IAttribute;
 import com.change_vision.jude.api.inf.model.IClass;
 import com.change_vision.jude.api.inf.model.IOperation;
 import com.change_vision.jude.api.inf.model.IParameter;
+import java.util.LinkedList;
 import java.util.List;
 
-public class ModelWrapper {
+public class ClassWrapper {
 
-    private IClass clazz;
+    private final IClass clazz;
+    private List<AttributeWrapper> attributes;
+    private List<OperationWrapper> operations;
 
-    public ModelWrapper(IClass clazz) {
+    public ClassWrapper(IClass clazz) {
         this.clazz = clazz;
     }
 
-    public String getClassName() {
-        return null;
+    public String getName() {
+        return this.clazz.getName();
+    }
+
+    public String getKind() {
+        return this.clazz.hasStereotype("interface") ? "interface" : "class";
     }
 
     List<AttributeWrapper> getAttributes() {
-        return null;
+        if (this.attributes == null) {
+            attributes = new LinkedList<>();
+            for (IAttribute attribute : this.clazz.getAttributes()) {
+                attributes.add(new AttributeWrapper(attribute));
+            }
+        }
+        return attributes;
     }
 
     List<OperationWrapper> getOperations() {
-        return null;
+        if (this.operations == null) {
+            operations = new LinkedList<>();
+            for (IOperation operation : this.clazz.getOperations()) {
+                operations.add(new OperationWrapper(operation));
+            }
+        }
+        return operations;
     }
 
-    private static class AttributeWrapper {
+    public static class AttributeWrapper {
 
-        private IAttribute attribute;
+        private final IAttribute attribute;
 
         public AttributeWrapper(IAttribute attribute) {
             this.attribute = attribute;
@@ -39,7 +58,7 @@ public class ModelWrapper {
         }
 
         public String getAttributeName() {
-            return null;
+            return this.attribute.getName();
         }
 
         public String getTypeName() {
@@ -47,7 +66,7 @@ public class ModelWrapper {
         }
     }
 
-    private static class OperationWrapper {
+    public static class OperationWrapper {
 
         private IOperation operation;
 
@@ -60,7 +79,7 @@ public class ModelWrapper {
         }
 
         public String getOperationName() {
-            return null;
+            return this.operation.getName();
         }
 
         public String getReturnTypeName() {
@@ -76,7 +95,7 @@ public class ModelWrapper {
         }
     }
 
-    private static class ParameterWrapper {
+    public static class ParameterWrapper {
 
         private IParameter parameter;
 
