@@ -1,4 +1,4 @@
-package dsk.export;
+package dsk.export.wrapper;
 
 import com.change_vision.jude.api.inf.AstahAPI;
 import com.change_vision.jude.api.inf.exception.LicenseNotFoundException;
@@ -8,14 +8,12 @@ import com.change_vision.jude.api.inf.exception.ProjectNotFoundException;
 import com.change_vision.jude.api.inf.model.IClass;
 import com.change_vision.jude.api.inf.model.INamedElement;
 import com.change_vision.jude.api.inf.project.ProjectAccessor;
-import dsk.export.ClassWrapper.AttributeWrapper;
-import dsk.export.ClassWrapper.OperationWrapper;
 import java.io.IOException;
 import java.util.List;
 import org.junit.*;
 import org.junit.Test;
 
-public class ModelWrapperTest {
+public class ClassWrapperTest {
 
     private ProjectAccessor api;
 
@@ -48,6 +46,11 @@ public class ModelWrapperTest {
         // クラスがらみ
         Assert.assertEquals("クラス0", model.getName());
         Assert.assertEquals("class", model.getKind());
+        Assert.assertEquals("", model.getTypeModifier());
+        Assert.assertEquals(false, model.isAbstract());
+        Assert.assertEquals(false, model.isActive());
+        Assert.assertEquals(false, model.isLeaf());
+        Assert.assertEquals(false, model.isReadOnly());
         // 属性がらみ
         List<AttributeWrapper> attributes = model.getAttributes();
         Assert.assertEquals(10, attributes.size());
