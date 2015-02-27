@@ -2,23 +2,28 @@ package dsk.export.wrapper;
 
 import com.change_vision.jude.api.inf.model.IAttribute;
 
-public class AttributeWrapper {
+public class AttributeWrapper extends NamedElementWrapper {
 
     private final IAttribute attribute;
 
     public AttributeWrapper(IAttribute attribute) {
+        super(attribute);
         this.attribute = attribute;
     }
 
-    public String getVisibility() {
-        return null;
+    public String getTypeExpression() {
+        return attribute.getTypeExpression();
     }
 
-    public String getAttributeName() {
-        return this.attribute.getName();
+    public String getInitialValue() {
+        return attribute.getInitialValue();
     }
 
-    public String getTypeName() {
-        return null;
+    public boolean isChangeable() {
+        return attribute.isChangeable();
+    }
+
+    public boolean isStatic() {
+        return attribute.isStatic();
     }
 }

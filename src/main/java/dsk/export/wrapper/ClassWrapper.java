@@ -3,22 +3,18 @@ package dsk.export.wrapper;
 import com.change_vision.jude.api.inf.model.IAttribute;
 import com.change_vision.jude.api.inf.model.IClass;
 import com.change_vision.jude.api.inf.model.IOperation;
-import dsk.common.exception.DskRuntimeException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ClassWrapper {
+public class ClassWrapper extends NamedElementWrapper{
 
     private final IClass clazz;
     private List<AttributeWrapper> attributes;
     private List<OperationWrapper> operations;
 
     public ClassWrapper(IClass clazz) {
+        super(clazz);
         this.clazz = clazz;
-    }
-
-    public String getName() {
-        return this.clazz.getName();
     }
 
     public String getKind() {
@@ -43,19 +39,6 @@ public class ClassWrapper {
 
     public String getTypeModifier() {
         return clazz.getTypeModifier();
-    }
-
-    public VisibilityKind getVisibility() {
-        if (this.clazz.isPublicVisibility()) {
-            return VisibilityKind.PUBLIC;
-        } else if (this.clazz.isProtectedVisibility()) {
-            return VisibilityKind.PROTECTED;
-        } else if (this.clazz.isPackageVisibility()) {
-            return VisibilityKind.PACKAGE;
-        } else if (this.clazz.isPrivateVisibility()) {
-            return VisibilityKind.PRIVATE;
-        }
-        throw new DskRuntimeException("可視性が不正です。astahのバグです。");
     }
 
     List<AttributeWrapper> getAttributes() {
